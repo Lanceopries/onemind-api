@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/auth");
+const searchRoutes = require("./routes/search");
 
 const path = require("path");
 const keys = require("./config/keys");
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use(require("cors")());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/search", searchRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/dist/client"));
