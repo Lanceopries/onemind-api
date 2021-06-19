@@ -9,7 +9,7 @@ module.exports.search = async function (req, res) {
       message: "Error, inn and ogrn list is empty",
     });
   }
-  let data = req.body.data.split(',');
+  let data = req.body.data;
   let persons = [];
   for (let param of data) {
     if (await Validators.isInnValid(param)) {
