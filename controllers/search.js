@@ -37,7 +37,13 @@ module.exports.search = async function (req, res) {
       }
     }
 
-    res.status(201).json(viewModels);
+    let result = {};
+    if(viewModels.length != 0){
+      result = viewModels[0];
+      result.sameOrganizationList = viewModels.slice(1);
+    }
+    
+    res.status(201).json(result);
   } catch (e) {
     errorHandler(res, e);
   }
