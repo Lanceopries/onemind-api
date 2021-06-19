@@ -6,6 +6,10 @@ const BaseUrl = "https://www.fedsfm.ru/documents/terrorists-catalog-portal-act?r
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
+module.exports.getServiceName = function(){
+  return serviceName;
+}
+
 /**
  * Get info about person from egrp
  *

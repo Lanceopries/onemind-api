@@ -5,6 +5,10 @@ const serviceName = "egrp";
 const ServiceError = require("../models/CustomErrors/ServiceError");
 const BaseUrl = "https://egrul.nalog.ru";
 
+module.exports.getServiceName = function(){
+  return serviceName;
+}
+
 /**
  * Get info about person from egrp
  *
@@ -36,6 +40,8 @@ module.exports.getInfo = async function (data) {
           type: getType(x),
           name: x.n,
           shortName: x.c,
+          dateFrom: x.r,
+          dateTo: x.e,
         };
       }),
     };

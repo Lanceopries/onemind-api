@@ -23,11 +23,21 @@ module.exports.search = async function (req, res) {
   }
 
   try {
-    let info = [];
+    let infoPromises = [];
     for(let person of persons){
-       info.push(await PersonProcessService.processPerson(person))
+      infoPromises.push(PersonProcessService.processPerson(person))
     }
-    res.status(201).json(info);
+
+    let viewModels = [];
+    let personInfos = await Promise.allSettled(infoPromises);
+    for(let personInfo of personInfos){
+      if(personInfo.status == "fulfilled"){
+        let viewModel = await PersonProcessService.getViewModel(personInfo.value);
+        viewModels.push(viewModel);
+      }
+    }
+
+    res.status(201).json(viewModels);
   } catch (e) {
     errorHandler(res, e);
   }

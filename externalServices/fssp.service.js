@@ -13,6 +13,10 @@ const regionArray = [
   27, 86, 74, 20, 21, 89, 76,
 ];
 
+module.exports.getServiceName = function(){
+  return serviceName;
+}
+
 /**
  * Get info about person from egrp
  *
