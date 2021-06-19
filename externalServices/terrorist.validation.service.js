@@ -1,6 +1,7 @@
 const util = require("../utils/pattern.retry.request");
 const ClientSearchFullData = require("../models/Entities/service.full.data");
-const NameParser = require("../utils/name.parser");
+const serviceName = "terroristCheck";
+const ServiceError = require("../models/CustomErrors/ServiceError");
 const BaseUrl = "https://www.fedsfm.ru/documents/terrorists-catalog-portal-act?roistat_visit=187412";
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -28,8 +29,11 @@ module.exports.getInfo = async function (data) {
 
     const result = terroristNames.filter(x => x == data.name);
 
-    return result;
+    return {
+      serviceName: serviceName,
+      data: result,
+    };
   } catch (error) {
-    throw error;
+    throw new ServiceError(error.message, serviceName);
   }
 };

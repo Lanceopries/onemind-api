@@ -7,7 +7,7 @@ const errorHandler = require("../utils/errorHandler");
 module.exports.search = async function (req, res) {
   if (!req.body.data) {
     return res.status(409).json({
-      message: "Error, inn and ogrn list is empty",
+      message: "Error: inn and ogrn list is empty",
     });
   }
   let data = req.body.data;

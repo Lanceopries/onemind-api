@@ -1,6 +1,8 @@
 const util = require("../utils/pattern.retry.request");
 const ClientSearchData = require("../models/Entities/service.data");
 const ClientSearchFullData = require("../models/Entities/service.full.data");
+const serviceName = "egrp";
+const ServiceError = require("../models/CustomErrors/ServiceError");
 const BaseUrl = "https://egrul.nalog.ru";
 
 /**
@@ -25,16 +27,20 @@ module.exports.getInfo = async function (data) {
     let searchDetail = await util.getRetry(
       BaseUrl + "/search-result/" + result.data.t
     );
-    return searchDetail.data.rows.map(function (x) {
-      return {
-        inn: x.i,
-        ogrn: x.o,
-        type: getType(x),
-        name: x.n,
-      };
-    });
+    return {
+      serviceName: serviceName,
+      data: searchDetail.data.rows.map(function (x) {
+        return {
+          inn: x.i,
+          ogrn: x.o,
+          type: getType(x),
+          name: x.n,
+          shortName: x.c,
+        };
+      }),
+    };
   } catch (error) {
-    throw error;
+    throw new ServiceError(error.message, serviceName);
   }
 };
 
