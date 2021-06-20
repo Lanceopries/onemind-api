@@ -29,7 +29,7 @@ module.exports.processPerson = async function (personInfo) {
     mainData.name,
     mainData.shortName
   );
-  
+
   let promises = [];
   for (service of services) {
     promises.push(service.getInfo(fullData));
