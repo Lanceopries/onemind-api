@@ -93,7 +93,7 @@ module.exports.getViewModel = async function (serviceInfo) {
       )
     );
   }
-  reliabilityMoreInfo.push(new MoreInfo("Капитал:", "1000000"));
+  reliabilityMoreInfo.push(new MoreInfo("Капитал:", "1 000 000 руб"));
   reliabilityMoreInfo.push(new MoreInfo("Филиалы:", "1"));
   reliabilityMoreInfo.push(new MoreInfo("Объектов недвижимости:", "3"));
   let reliability = {
