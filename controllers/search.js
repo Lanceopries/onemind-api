@@ -1,7 +1,6 @@
 const PersonProcessService = require("../services/process.person.service");
 const Validators = require("../utils/validators");
 const ClientSearchData = require("../models/Entities/service.data");
-const { json } = require("body-parser");
 const errorHandler = require("../utils/errorHandler");
 
 module.exports.search = async function (req, res) {
@@ -43,7 +42,7 @@ module.exports.search = async function (req, res) {
       result.sameOrganizationList = viewModels.slice(1);
     }
     
-    res.status(201).json(result);
+    res.status(200).json(result);
   } catch (e) {
     errorHandler(res, e);
   }

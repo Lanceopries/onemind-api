@@ -71,7 +71,7 @@ async function getInfoByPerson(data, countProcessed) {
   }
 
   while (true) {
-    await util.delay(200);
+    await util.delay(1000);
 
     let status = await getStatusOfTask(taskObj.task);
     if (status != 1 && status != 2) {
