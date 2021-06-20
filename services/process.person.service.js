@@ -102,7 +102,7 @@ module.exports.getViewModel = async function (serviceInfo) {
   };
 
   let freeLimitInfo = [];
-  freeLimitInfo.push(new MoreInfo("Капитал:", "1000000"));
+  freeLimitInfo.push(new MoreInfo("Капитал:", "1 000 000 руб"));
   freeLimitInfo.push(new MoreInfo("Филиалы:", "1"));
   freeLimitInfo.push(new MoreInfo("Объектов недвижимости:", "3"));
   freeLimitInfo.push(new MoreInfo("Рост выручки:", "+5%"));
@@ -112,7 +112,7 @@ module.exports.getViewModel = async function (serviceInfo) {
   };
 
   let companyPriceInfo = [];
-  companyPriceInfo.push(new MoreInfo("Капитал:", "1000000"));
+  companyPriceInfo.push(new MoreInfo("Капитал:", "1 000 000 руб"));
   companyPriceInfo.push(new MoreInfo("Объектов недвижимости:", "3"));
   let companyPrice = {
     result: "100",
