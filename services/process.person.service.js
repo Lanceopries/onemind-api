@@ -85,6 +85,8 @@ module.exports.getViewModel = async function (serviceInfo) {
     riskPercent: getRandomInt(0, 50),
     dynamicPercent: getRandomInt(0, 30),
   };
+  const searchRegExp = /[,]/g;
+  let formatterCapitalization = new Intl.NumberFormat('ru-RU').format(randomValues.capitalizationAmount).replace(searchRegExp, " ") + " руб";
 
   let reliabilityMoreInfo = [];
   let fsspInfo = serviceInfo.find((x) => x.service == fssp.getServiceName());
@@ -111,12 +113,13 @@ module.exports.getViewModel = async function (serviceInfo) {
     }
   }
   reliabilityMoreInfo.push(
-    new MoreInfo("Капитализация", randomValues.capitalizationAmount)
+    new MoreInfo("Капитализация", formatterCapitalization)
   );
   reliabilityMoreInfo.push(new MoreInfo("Филиалы", randomValues.filialCount));
   reliabilityMoreInfo.push(
     new MoreInfo("Объектов недвижимости", randomValues.buildingCount)
   );
+  reliabilityMoreInfo.push(new MoreInfo("Риски", randomValues.riskPercent + "%"));
   let scoreReliablilty = await getScoreByReliability(
     egrpInfo.data,
     fsspCount,
@@ -130,28 +133,28 @@ module.exports.getViewModel = async function (serviceInfo) {
 
   let freeLimitInfo = [];
   freeLimitInfo.push(
-    new MoreInfo("Капитализация", randomValues.capitalizationAmount)
+    new MoreInfo("Капитализация", formatterCapitalization)
   );
   freeLimitInfo.push(new MoreInfo("Филиалы", randomValues.filialCount));
   freeLimitInfo.push(
     new MoreInfo("Объектов недвижимости", randomValues.buildingCount)
   );
-  freeLimitInfo.push(new MoreInfo("Рост выручки", randomValues.dynamicPercent));
+  freeLimitInfo.push(new MoreInfo("Рост выручки", randomValues.dynamicPercent + "%"));
   let freeLimit = {
-    result: scoreService.getMaxAmountCredit(
+    result: new Intl.NumberFormat('ru-RU').format(await scoreService.getMaxAmountCredit(
       randomValues.capitalizationAmount,
       randomValues.riskPercent,
       randomValues.dynamicPercent
-    ),
+    )).replace(searchRegExp, " ") + " руб",
     moreInfo: freeLimitInfo,
   };
 
   let companyPriceInfo = [];
   companyPriceInfo.push(
-    new MoreInfo("Капитализация", randomValues.capitalizationAmount)
+    new MoreInfo("Капитализация", formatterCapitalization)
   );
   let companyPrice = {
-    result: randomValues.capitalizationAmount / 1000,
+    result: formatterCapitalization,
     moreInfo: companyPriceInfo,
   };
 

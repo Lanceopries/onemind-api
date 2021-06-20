@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const timeout = require('connect-timeout');
 
 const authRoutes = require("./routes/auth");
 const searchRoutes = require("./routes/search");
@@ -33,6 +34,8 @@ app.use(require("cors")());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/search", searchRoutes);
+
+app.use(timeout(120000));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/dist/client"));

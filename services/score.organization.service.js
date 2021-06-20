@@ -41,7 +41,7 @@ module.exports.getMaxCountOfScore = async function (countOfParameters){
  * @param {Number} countFssp 
  */
  module.exports.getScoreForFssp = async function (countFssp){
-    const bestCount = 5;
+    const bestCount = 3;
     let score = countFssp * maxScoreForPoint / bestCount;
     if(score > maxScoreForPoint){
         score = maxScoreForPoint;
@@ -52,7 +52,7 @@ module.exports.getMaxCountOfScore = async function (countOfParameters){
 module.exports.getMaxAmountCredit = async function (amountCapital, risksPercent, dynamicGrowPercent){
     let riskOffCapital = amountCapital * (1 - risksPercent/100);
     let dynamicBonus = riskOffCapital * (dynamicGrowPercent / 100);
-    return (riskOffCapital + dynamicBonus) / 1000;
+    return Math.trunc(riskOffCapital + dynamicBonus);
 }
 
 module.exports.getVerdict = async function (scoreReliability){
